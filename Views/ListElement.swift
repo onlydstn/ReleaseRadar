@@ -1,5 +1,5 @@
 //
-//  ChartView.swift
+//  ListElement.swift
 //  MusicPlayerApp
 //
 //  Created by Dustin Nuzzo on 10.09.24.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ChartView: View {
+struct ListElement: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Test")
     }
 }
 
 #Preview {
-    ChartView()
+    ListElement()
 }

@@ -10,7 +10,9 @@
 		3749ECF82C902689006A363A /* MusicPlayerAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749ECF72C902689006A363A /* MusicPlayerAppApp.swift */; };
 		3749ECFC2C90268A006A363A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3749ECFB2C90268A006A363A /* Assets.xcassets */; };
 		3749ED002C90268A006A363A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3749ECFF2C90268A006A363A /* Preview Assets.xcassets */; };
-		3749ED072C90274D006A363A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749ED062C90274D006A363A /* ChartView.swift */; };
+		3749ED0F2C902EEE006A363A /* ChartListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749ED0E2C902EEE006A363A /* ChartListView.swift */; };
+		3749ED112C902F07006A363A /* ListElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749ED102C902F07006A363A /* ListElement.swift */; };
+		3749ED142C903181006A363A /* ChartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749ED132C903181006A363A /* ChartItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,7 +21,9 @@
 		3749ECFB2C90268A006A363A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3749ECFD2C90268A006A363A /* MusicPlayerApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MusicPlayerApp.entitlements; sourceTree = "<group>"; };
 		3749ECFF2C90268A006A363A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		3749ED062C90274D006A363A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		3749ED0E2C902EEE006A363A /* ChartListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartListView.swift; sourceTree = "<group>"; };
+		3749ED102C902F07006A363A /* ListElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListElement.swift; sourceTree = "<group>"; };
+		3749ED132C903181006A363A /* ChartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +40,8 @@
 		3749ECEB2C902689006A363A = {
 			isa = PBXGroup;
 			children = (
+				3749ED122C903172006A363A /* Model */,
+				3749ED0D2C902EDC006A363A /* Views */,
 				3749ECF62C902689006A363A /* MusicPlayerApp */,
 				3749ECF52C902689006A363A /* Products */,
 			);
@@ -52,7 +58,6 @@
 		3749ECF62C902689006A363A /* MusicPlayerApp */ = {
 			isa = PBXGroup;
 			children = (
-				3749ED062C90274D006A363A /* ChartView.swift */,
 				3749ECF72C902689006A363A /* MusicPlayerAppApp.swift */,
 				3749ECFB2C90268A006A363A /* Assets.xcassets */,
 				3749ECFD2C90268A006A363A /* MusicPlayerApp.entitlements */,
@@ -67,6 +72,23 @@
 				3749ECFF2C90268A006A363A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3749ED0D2C902EDC006A363A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3749ED0E2C902EEE006A363A /* ChartListView.swift */,
+				3749ED102C902F07006A363A /* ListElement.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3749ED122C903172006A363A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3749ED132C903181006A363A /* ChartItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +162,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3749ECF82C902689006A363A /* MusicPlayerAppApp.swift in Sources */,
-				3749ED072C90274D006A363A /* ChartView.swift in Sources */,
+				3749ED0F2C902EEE006A363A /* ChartListView.swift in Sources */,
+				3749ED112C902F07006A363A /* ListElement.swift in Sources */,
+				3749ED142C903181006A363A /* ChartItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
