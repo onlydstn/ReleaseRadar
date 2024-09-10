@@ -7,54 +7,100 @@
 
 import SwiftUI
 
-struct ChartListView: View {
-    let chartItems = [
-        ChartItem(position: 1, albumCover: "cover1", songTitle: "ENDLICH TUT ES WIEDER WEH", artist: "ELIF", streams: "8,198,872 streams"),
-        ChartItem(position: 2, albumCover: "cover1", songTitle: "BOMBERJACKE", artist: "ELIF", streams: "7,801,301 streams"),
-        ChartItem(position: 3, albumCover: "cover1", songTitle: "BEIFAHRERSITZ", artist: "ELIF", streams: "3,366,102 streams"),
-        ChartItem(position: 4, albumCover: "cover1", songTitle: "ROSES", artist: "ELIF", streams: "1,928,751 streams"),
-        ChartItem(position: 5, albumCover: "cover1", songTitle: "MEIN BABE", artist: "ELIF", streams: "999,863 streams")
-    ]
-    
+//MARK: - TabView
+struct MainTabView: View {
     var body: some View {
-        List(chartItems) { item in
-            HStack {
-                // Chartposition
-                Text("#\(item.position)")
-                    .font(.headline)
-                    .foregroundColor(.purple)
-                
-                VStack(alignment: .leading) {
-                    // Songtitel
-                    Text(item.songTitle)
-                        .font(.headline)
-                    
-                    // Name des Künstlers
-                    Text(item.artist)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                    
-                    // Streams
-                    Text(item.streams)
-                        .font(.footnote)
-                        .foregroundColor(.gray)
+        TabView {
+            ChartListView()
+                .tabItem {
+                    Image(systemName: "music.note.list")
+                    Text("Charts")
                 }
-                
-                Spacer()
-                
-                // Albumcover
-                Image(item.albumCover)
-                    .resizable()
-                    .frame(width: 80, height: 80)
-                    .cornerRadius(8)
-            }
-            .padding(.vertical, 8)
+            SearchView()
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                    Text("Suche")
+                }
         }
-        .listStyle(PlainListStyle())
     }
 }
 
-
-#Preview {
-    ChartListView()
-}
+//MARK: - ChartListView
+struct ChartListView: View {
+    @State var songsArray: [ChartEntry] = []
+    
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(Array(songsArray.enumerated()), id: \.element) { index, item in
+                    HStack {
+                        /// Chartposition
+                        ZStack {
+                            Text("#\(index + 1)")
+                                .font(.system(size: 100))
+                                .fontWeight(.bold)
+                                .foregroundStyle(.purple.opacity(0.15))
+                                .rotationEffect(.degrees(-30))
+                                .padding(.trailing)
+                            
+                            HStack {
+                                VStack(alignment: .leading, spacing: 12) {
+                                    /// Songtitel
+                                    Text("\(item.name)")
+                                        .font(.headline)
+                                    
+                                    /// Name des Künstlers
+                                    Text("\(item.artistName)")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                    
+                                    /// Releasedate
+                                    Text(item.releaseDate)
+                                        .font(.footnote)
+                                        .foregroundColor(.gray)
+                                }
+                                Spacer()
+                                
+                                /// Albumcover
+                                AsyncImage(url: URL(string: item.artworkUrl100))
+                                    .frame(width: 95, height: 95)
+                                    .cornerRadius(8)
+                            }
+                            .padding(.vertical, 8)
+                        }
+                        //öffnet Titel in Apple Music
+                        .onTapGesture {
+                            UIApplication.shared.open(URL(string: "\(item.url)")!)
+                        }
+                    }
+                }
+                .navigationTitle("Charts")
+            }
+            .task {
+                fetchSongsFromJSON()
+            }
+            .listStyle(PlainListStyle())
+        }
+    }
+        
+        //MARK: Funkton zum Laden der JSON
+        private func fetchSongsFromJSON() {
+            guard let path = Bundle.main.path(forResource: "charts", ofType: "json") else {
+                print("File doesn't exist")
+                return
+            }
+            do {
+                let data = try Data(contentsOf: URL(filePath: path))
+                let songs = try JSONDecoder().decode(APIResults.self, from: data)
+                
+                self.songsArray = songs.feed.results
+            } catch {
+                print("Error: \(error)")
+                return
+            }
+        }
+    }
+    
+    #Preview {
+        MainTabView()
+    }
