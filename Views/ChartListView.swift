@@ -35,12 +35,11 @@ struct ChartListView: View {
                 ForEach(Array(songsArray.enumerated()), id: \.element) { index, item in
                     HStack {
                         /// Chartposition
-                        ZStack {
+                        HStack {
                             Text("#\(index + 1)")
-                                .font(.system(size: 100))
+                                .font(.system(size: 24))
                                 .fontWeight(.bold)
-                                .foregroundStyle(.purple.opacity(0.15))
-                                .rotationEffect(.degrees(-30))
+                                .foregroundStyle(.purple.opacity(0.3))
                                 .padding(.trailing)
                             
                             HStack {
@@ -73,34 +72,36 @@ struct ChartListView: View {
                             UIApplication.shared.open(URL(string: "\(item.url)")!)
                         }
                     }
+                    .listRowBackground(Color(.systemGray).opacity(0.05)) // Hintergrund für die Listenzellen
                 }
                 .navigationTitle("Charts")
             }
-            .task {
-                fetchSongsFromJSON()
-            }
             .listStyle(PlainListStyle())
+            .background(Color(.systemGray).opacity(0.01)) // Hintergrund für die Liste
         }
-    }
-        
-        //MARK: Funkton zum Laden der JSON
-        private func fetchSongsFromJSON() {
-            guard let path = Bundle.main.path(forResource: "charts", ofType: "json") else {
-                print("File doesn't exist")
-                return
-            }
-            do {
-                let data = try Data(contentsOf: URL(filePath: path))
-                let songs = try JSONDecoder().decode(APIResults.self, from: data)
-                
-                self.songsArray = songs.feed.results
-            } catch {
-                print("Error: \(error)")
-                return
-            }
+        .task {
+            fetchSongsFromJSON()
         }
     }
     
-    #Preview {
-        MainTabView()
+    //MARK: Funkton zum Laden der JSON
+    private func fetchSongsFromJSON() {
+        guard let path = Bundle.main.path(forResource: "charts", ofType: "json") else {
+            print("File doesn't exist")
+            return
+        }
+        do {
+            let data = try Data(contentsOf: URL(filePath: path))
+            let songs = try JSONDecoder().decode(APIResults.self, from: data)
+            
+            self.songsArray = songs.feed.results
+        } catch {
+            print("Error: \(error)")
+            return
+        }
     }
+}
+
+#Preview {
+    MainTabView()
+}
