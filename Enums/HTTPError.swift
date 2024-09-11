@@ -13,7 +13,7 @@ enum HTTPError: Error {
     var message: String {
         switch self {
         case .invalidURL: "Die URL ist ungültig."
-        case .fetchFailed: "Lade ist fehlgeschlagen."
+        case .fetchFailed: "Fehler beim Laden der API-Daten."
         }
     }
 }
