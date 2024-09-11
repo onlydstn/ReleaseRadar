@@ -74,14 +74,29 @@ struct ChartListView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Picker("Land", selection: $selectedCountry) {
+                Menu {
                     ForEach(availableCountries.keys.sorted(), id: \.self) { key in
-                        Text(availableCountries[key] ?? "")
+                        Button(action: {
+                            selectedCountry = key
+                            reloadData()
+                        }) {
+                            Label(availableCountries[key] ?? "", systemImage: selectedCountry == key ? "checkmark.circle.fill" : "circle")
+                        }
                     }
+                } label: {
+                    HStack {
+                        Text(availableCountries[selectedCountry] ?? "Land auswählen")
+                            .foregroundColor(.primary)
+                            .padding(.vertical, 10)
+                        Spacer()
+                        Image(systemName: "chevron.down")
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.horizontal)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
                 }
-                .onChange(of: selectedCountry) {
-                    reloadData()
-                }
+                .padding(.horizontal)
                 
                 Picker("Typ", selection: $selectedType) {
                     ForEach(chartTypes, id: \.self) {
@@ -156,7 +171,7 @@ struct ChartListView: View {
     
     //MARK: - Funktion um Listeneinträge neu zu laden, wenn Pickerauswahl getätigt wurde
     private func reloadData() {
-        // Liste leeren und Offset zurücksetzen damit API neu lädt
+        // Liste leeren damit API neu lädt
         songsArray.removeAll()
         Task {
             await fetchScheduleFromAPI()
@@ -164,26 +179,26 @@ struct ChartListView: View {
     }
     
     //MARK: - Funkton zum Laden der lokalen JSON
-//    private func fetchSongsFromJSON() {
-//        guard let path = Bundle.main.path(forResource: "charts", ofType: "json") else {
-//            print("File doesn't exist")
-//            return
-//        }
-//        do {
-//            let data = try Data(contentsOf: URL(filePath: path))
-//            let songs = try JSONDecoder().decode(APIResults.self, from: data)
-//            
-//            self.songsArray = songs.feed.results
-//        } catch {
-//            print("Error: \(error)")
-//            return
-//        }
-//    }
+    //    private func fetchSongsFromJSON() {
+    //        guard let path = Bundle.main.path(forResource: "charts", ofType: "json") else {
+    //            print("File doesn't exist")
+    //            return
+    //        }
+    //        do {
+    //            let data = try Data(contentsOf: URL(filePath: path))
+    //            let songs = try JSONDecoder().decode(APIResults.self, from: data)
+    //
+    //            self.songsArray = songs.feed.results
+    //        } catch {
+    //            print("Error: \(error)")
+    //            return
+    //        }
+    //    }
     
     //MARK: - Funktion zum Laden von Daten aus API
     private func getScheduleFromAPI() async throws -> [ChartEntry] {
         let type = selectedType.lowercased() == "songs" ? "songs" : "albums"
-        let urlString = "https://rss.applemarketingtools.com/api/v2/\(selectedCountry)/music/most-played/50/\(type).json"
+        let urlString = "https://rss.applemarketingtools.com/api/v2/\(selectedCountry)/music/most-played/100/\(type).json"
         
         guard let url = URL(string: urlString) else {
             throw HTTPError.invalidURL
