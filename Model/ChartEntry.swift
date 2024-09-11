@@ -17,7 +17,9 @@ import Foundation
 //}
 
 //Modell
-struct ChartEntry: Codable, Hashable {
+struct ChartEntry: Codable, Identifiable {
+    var id: String
+    
     var name: String // Liedname
     var artistName: String // Name des Künstlers
     var releaseDate: String
