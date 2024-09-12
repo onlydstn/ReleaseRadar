@@ -32,7 +32,7 @@ struct ChartListView: View {
     @State var selectedCountry = "de" // Standard DE
     
     let chartTypes = ["Songs", "Alben"] // Picker für jeweiligen Typ
-    let availableCountries = [
+    let availableCountries = [ // Dictionary mit Key und Value "de" <- Key, "Germany" <- Value
         "af": "Afghanistan", "al": "Albanien", "dz": "Algerien", "ad": "Andorra", "ao": "Angola",
         "ag": "Antigua und Barbuda", "ar": "Argentinien", "am": "Armenien", "az": "Aserbaidschan",
         "bs": "Bahamas", "bh": "Bahrain", "bd": "Bangladesch", "bb": "Barbados", "be": "Belgien",
@@ -103,7 +103,7 @@ struct ChartListView: View {
                         Text($0)
                     }
                 }
-                .pickerStyle(SegmentedPickerStyle())
+                .pickerStyle(.segmented)
                 // Liste bei Auswahl neu laden
                 .onChange(of: selectedType) {
                     reloadData()
@@ -148,7 +148,7 @@ struct ChartListView: View {
                                 .frame(width: 95, height: 95)
                                 .cornerRadius(8)
                         } placeholder: {
-                            Image("placeholder")
+                            //Image("placeholder") ohne placeholder viel flüssigeres Scrollverhalten
                         }
                     }
                     //öffnet Titel in Apple Music
