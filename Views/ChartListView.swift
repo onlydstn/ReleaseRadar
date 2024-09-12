@@ -30,7 +30,7 @@ struct ChartListView: View {
     @State var songsArray: [ChartEntry] = [] // Array der geladene Songs speichert
     @State var selectedType = "Songs" // Songs oder Alben auswählen
     @State var selectedCountry = "de" // Standard DE
-    @State var canLoadData = false
+    @Environment(\.colorScheme) var appearence
     
     let chartTypes = ["Songs", "Alben"] // Picker für jeweiligen Typ
     let availableCountries = [ // Dictionary für Pickerauswahl Länder ["de": "Deutschland"] "de" <- Key, "Deutschland" <- Value
@@ -100,10 +100,31 @@ struct ChartListView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                             
-                            /// Releasedate
-                            Text(item.releaseDate)
-                                .font(.footnote)
-                                .foregroundColor(.gray)
+                            HStack {
+                                /// Releasedate
+                                Text(item.releaseDate)
+                                    .font(.footnote)
+                                    .foregroundColor(.gray)
+                                Spacer()
+                                HStack {
+                                    Image(appearence == .dark ? "darklogo" : "lightlogo")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 25, height: 25)
+                                    VStack(alignment: .leading) {
+                                        Text("Listen on")
+                                            .bold()
+                                            .font(.system(size: 8))
+                                        Text(" Music")
+                                            .font(.system(size: 12))
+                                    }
+                                }
+                                .frame(width: .infinity, height: .infinity)
+                                .onTapGesture {
+                                    // öffnet Apple Music
+                                    UIApplication.shared.open(URL(string: "\(item.url)")!)
+                                }
+                            }
                         }
                         Spacer()
                         
@@ -116,10 +137,6 @@ struct ChartListView: View {
                         } placeholder: {
                             //Image("placeholder") ohne placeholder viel flüssigeres Scrollverhalten
                         }
-                    }
-                    //öffnet Titel in Apple Music
-                    .onTapGesture {
-                        UIApplication.shared.open(URL(string: "\(item.url)")!)
                     }
                     .listRowBackground(Color(.clear))
                 }
