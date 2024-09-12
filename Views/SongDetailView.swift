@@ -18,20 +18,19 @@ struct SongDetailView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                AsyncImage(url: URL(string: coverUrl)) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: UIScreen.main.bounds.width, height: 300)
-                        .clipped()
-                } placeholder: {
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.3))
-                        .frame(width: UIScreen.main.bounds.width, height: 300)
-                }
+            AsyncImage(url: URL(string: coverUrl)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(RoundedRectangle(cornerRadius: 15)).shadow(radius: 10)
+                    .frame(width: 200, height: 200)
+                    .padding()
                 
-                VStack(alignment: .leading, spacing: 8) {
+            } placeholder: {
+                // leer weil flüssiger beim scrollen
+            }
+            VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 16) {
                     Text(songName)
                         .font(.title)
                         .fontWeight(.bold)
@@ -42,33 +41,13 @@ struct SongDetailView: View {
                         .foregroundColor(.gray)
                         .padding(.horizontal)
                     
-                    Text("Release Date: \(releaseDate)")
+                    Text("Veröffentlichung am: \(releaseDate)")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .padding(.horizontal)
-                    
-                    HStack {
-                        Image(appearance == .dark ? "darklogo" : "lightlogo")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 30, height: 30)
-                        VStack(alignment: .leading) {
-                            Text("Listen on")
-                                .bold()
-                                .font(.caption)
-                            Text(" Music")
-                                .font(.footnote)
-                        }
-                    }
-                    .padding()
-                    .background(Color.blue.opacity(0.1))
-                    .cornerRadius(8)
-                    .onTapGesture {
-                        // öffnet Apple Music
-                        UIApplication.shared.open(URL(string: "\(songUrl)")!)
-                    }
                 }
                 .padding(.top, 16)
+                .padding(.trailing, 48)
             }
         }
         .navigationTitle("Song Details")

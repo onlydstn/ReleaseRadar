@@ -30,6 +30,7 @@ struct ChartListView: View {
     @State var songsArray: [ChartEntry] = [] // Array der geladene Songs speichert
     @State var selectedType = "Songs" // Songs oder Alben auswählen
     @State var selectedCountry = "de" // Standard DE
+
     @Environment(\.colorScheme) var appearence
     
     let chartTypes = ["Songs", "Alben"] // Picker für jeweiligen Typ
@@ -81,64 +82,66 @@ struct ChartListView: View {
                 ForEach(Array(songsArray.enumerated()), id: \.element.id) { index, item in
                     //MARK: Albumcover Link
                     let url = URL(string: item.artworkUrl100)
-                    
-                    /// Chartposition
-                    HStack {
-                        Text("#\(index + 1)")
-                            .font(.system(size: 24))
-                            .fontWeight(.bold)
-                            .foregroundStyle(.purple.opacity(0.3))
-                            .padding(.trailing)
+                    NavigationLink(destination: SongDetailView(songName: item.name, artistName: item.artistName, coverUrl: item.artworkUrl100, releaseDate: item.releaseDate, songUrl: item.url)) {
                         
-                        VStack(alignment: .leading, spacing: 12) {
-                            /// Songtitel
-                            Text("\(item.name)")
-                                .font(.headline)
+                        /// Chartposition
+                        HStack {
+                            Text("#\(index + 1)")
+                                .font(.system(size: 24))
+                                .fontWeight(.bold)
+                                .foregroundStyle(.purple.opacity(0.3))
+                                .padding(.trailing)
                             
-                            /// Name des Künstlers
-                            Text("\(item.artistName)")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                            
-                            HStack {
-                                /// Releasedate
-                                Text(item.releaseDate)
-                                    .font(.footnote)
+                            VStack(alignment: .leading, spacing: 12) {
+                                /// Songtitel
+                                Text("\(item.name)")
+                                    .font(.headline)
+                                
+                                /// Name des Künstlers
+                                Text("\(item.artistName)")
+                                    .font(.subheadline)
                                     .foregroundColor(.gray)
-                                Spacer()
+                                
                                 HStack {
-                                    Image(appearence == .dark ? "darklogo" : "lightlogo")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 25, height: 25)
-                                    VStack(alignment: .leading) {
-                                        Text("Listen on")
-                                            .bold()
-                                            .font(.system(size: 8))
-                                        Text(" Music")
-                                            .font(.system(size: 12))
+                                    /// Releasedate
+                                    Text(item.releaseDate)
+                                        .font(.footnote)
+                                        .foregroundColor(.gray)
+                                    Spacer()
+                                    
+                                    HStack {
+                                        Image(appearence == .dark ? "darklogo" : "lightlogo")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 25, height: 25)
+                                        VStack(alignment: .leading) {
+                                            Text("Listen on")
+                                                .bold()
+                                                .font(.system(size: 8))
+                                            Text(" Music")
+                                                .font(.system(size: 12))
+                                        }
+                                    }
+                                    .onTapGesture {
+                                        // öffnet Apple Music
+                                        UIApplication.shared.open(URL(string: "\(item.url)")!)
                                     }
                                 }
-                                .frame(width: .infinity, height: .infinity)
-                                .onTapGesture {
-                                    // öffnet Apple Music
-                                    UIApplication.shared.open(URL(string: "\(item.url)")!)
-                                }
+                            }
+                            Spacer()
+                            
+                            /// Albumcover
+                            AsyncImage(url: url) { image in
+                                image
+                                    .resizable()
+                                    .frame(width: 95, height: 95)
+                                    .cornerRadius(8)
+                            } placeholder: {
+                                //Image("placeholder") ohne placeholder viel flüssigeres Scrollverhalten
                             }
                         }
-                        Spacer()
-                        
-                        /// Albumcover
-                        AsyncImage(url: url) { image in
-                            image
-                                .resizable()
-                                .frame(width: 95, height: 95)
-                                .cornerRadius(8)
-                        } placeholder: {
-                            //Image("placeholder") ohne placeholder viel flüssigeres Scrollverhalten
-                        }
+                        .listRowBackground(Color(.clear))
                     }
-                    .listRowBackground(Color(.clear))
                 }
             }
             .navigationTitle("Charts")
