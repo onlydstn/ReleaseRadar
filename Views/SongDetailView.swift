@@ -23,13 +23,14 @@ struct SongDetailView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .clipShape(RoundedRectangle(cornerRadius: 15)).shadow(radius: 10)
+                    .shadow(radius: 10)
                     .frame(width: 275, height: 275)
                     .padding()
                 
             } placeholder: {
                 // leer weil flüssiger beim scrollen
             }
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text(songName)
                     .font(.title)
                     .fontWeight(.bold)
