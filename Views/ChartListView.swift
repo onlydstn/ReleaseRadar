@@ -108,24 +108,7 @@ struct ChartListView: View {
                                         .font(.footnote)
                                         .foregroundColor(.gray)
                                     Spacer()
-                                    
-                                    HStack {
-                                        Image(appearence == .dark ? "darklogo" : "lightlogo")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 25, height: 25)
-                                        VStack(alignment: .leading) {
-                                            Text("Listen on")
-                                                .bold()
-                                                .font(.system(size: 8))
-                                            Text(" Music")
-                                                .font(.system(size: 12))
-                                        }
-                                    }
-                                    .onTapGesture {
-                                        // öffnet Apple Music
-                                        UIApplication.shared.open(URL(string: "\(item.url)")!)
-                                    }
+            
                                 }
                             }
                             Spacer()

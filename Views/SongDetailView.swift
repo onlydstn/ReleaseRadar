@@ -14,8 +14,8 @@ struct SongDetailView: View {
     let releaseDate: String
     let songUrl: String
     
-    @Environment(\.colorScheme) var appearance
-
+    @Environment(\.colorScheme) var appearence
+    
     var body: some View {
         ScrollView {
             AsyncImage(url: URL(string: coverUrl)) { image in
@@ -23,31 +23,51 @@ struct SongDetailView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .clipShape(RoundedRectangle(cornerRadius: 15)).shadow(radius: 10)
-                    .frame(width: 200, height: 200)
+                    .frame(width: 275, height: 275)
                     .padding()
                 
             } placeholder: {
                 // leer weil flüssiger beim scrollen
             }
             VStack(alignment: .leading, spacing: 16) {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text(songName)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding(.horizontal)
-                    
-                    Text(artistName)
-                        .font(.title2)
-                        .foregroundColor(.gray)
-                        .padding(.horizontal)
-                    
-                    Text("Veröffentlichung am: \(releaseDate)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .padding(.horizontal)
+                Text(songName)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.horizontal)
+                
+                Text(artistName)
+                    .font(.title2)
+                    .foregroundColor(.gray)
+                    .padding(.horizontal)
+                
+                Text("Veröffentlichung am: \(releaseDate)")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .padding(.horizontal)
+                Spacer()
+                
+                Link(destination: URL(string: songUrl)!) {
+                    HStack {
+                        Image(appearence == .dark ? "darklogo" : "lightlogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                        
+                        VStack(alignment: .leading) {
+                            Text("Listen on")
+                                .bold()
+                                .font(.system(size: 24))
+                                Text(" Music")
+                                .font(.system(size: 16))
+                        }
+                        .padding(.leading, 8)
+                        Spacer()
+                    }
+                    .padding(4)
+                    .background(RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.gray.opacity(0.1)))
+                    .padding()
                 }
-                .padding(.top, 16)
-                .padding(.trailing, 48)
             }
         }
         .navigationTitle("Song Details")
