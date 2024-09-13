@@ -16,11 +16,6 @@ struct MainTabView: View {
                     Image(systemName: "music.note.list")
                     Text("Charts")
                 }
-            SearchView()
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Suche")
-                }
         }
     }
 }
@@ -31,8 +26,7 @@ struct ChartListView: View {
     @State var selectedType = "Songs" // Songs oder Alben auswählen
     @State var selectedCountry = "de" // Standard DE
     
-
-    @Environment(\.colorScheme) var appearence
+    @Environment(\.openURL) var openURL // öffnet Apple Music
     
     let loadSongs = 50
     let chartTypes = ["Songs", "Alben"] // Picker für jeweiligen Typ
@@ -84,9 +78,14 @@ struct ChartListView: View {
                 ForEach(Array(songsArray.enumerated()), id: \.element.id) { index, item in
                     //MARK: Albumcover Link
                     let url = URL(string: item.artworkUrl100)
-                    NavigationLink(destination: SongDetailView(songName: item.name, artistName: item.artistName, coverUrl: item.artworkUrl100, releaseDate: item.releaseDate, songUrl: item.url)) {
-                        
-                        /// Chartposition
+                    
+                    // Button damit ganze Listeneinträge tapbar sind und sich die URL öffnet
+                    Button(action: {
+                        // stellt sicher dass nur korrekte URL geöffnet werden um Crashes zu verhindern
+                        if let songURL = URL(string: item.url) {
+                            openURL(songURL)
+                        }
+                    }) {
                         HStack {
                             Text("#\(index + 1)")
                                 .font(.system(size: 24))
@@ -110,7 +109,6 @@ struct ChartListView: View {
                                         .font(.footnote)
                                         .foregroundColor(.gray)
                                     Spacer()
-            
                                 }
                             }
                             Spacer()
@@ -125,8 +123,9 @@ struct ChartListView: View {
                                 //Image("placeholder") ohne placeholder viel flüssigeres Scrollverhalten
                             }
                         }
-                        .listRowBackground(Color(.clear))
                     }
+                    .buttonStyle(.plain)
+                    .listRowBackground(Color(.clear))
                 }
             }
             .navigationTitle("Charts")
@@ -193,6 +192,8 @@ struct ChartListView: View {
     }
 }
 
+
 #Preview {
     MainTabView()
 }
+
