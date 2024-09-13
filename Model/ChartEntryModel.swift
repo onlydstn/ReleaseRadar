@@ -11,9 +11,9 @@ import Foundation
 struct ChartEntry: Codable, Identifiable {
     let id: String
     
-    let name: String // Liedname
-    let artistName: String // Name des Künstlers
-    let releaseDate: String
-    let artworkUrl100: String // Cover
-    let url: String // Link zum Song
+    let name: String // songname
+    let artistName: String // artistname
+    let releaseDate: String // releasedate
+    let artworkUrl100: String // artwork link
+    let url: String // link to apple music
 }

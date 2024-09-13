@@ -29,7 +29,7 @@ struct MainTabView: View {
 //MARK: - ChartListView
 struct ChartListView: View {
     @StateObject var viewModel = ChartListViewModel()
-    @Environment(\.openURL) var openURL // öffnet Apple Music
+    @Environment(\.openURL) var openURL // opens Apple Music
     
     var body: some View {
         NavigationStack {
@@ -76,9 +76,9 @@ struct ChartListView: View {
                     //MARK: Albumcover Link
                     let url = URL(string: item.artworkUrl100)
                     
-                    // Button damit ganze Listeneinträge tapbar sind und sich die URL öffnet
+                    // Button so ListEntries are tappable and Apple Music opens
                     Button(action: {
-                        // stellt sicher dass nur korrekte URL geöffnet werden um Crashes zu verhindern
+                        // assures that obly valid URL are opened to prevent crashes
                         if let songURL = URL(string: item.url) {
                             openURL(songURL)
                         }
@@ -91,17 +91,14 @@ struct ChartListView: View {
                                 .padding(.trailing)
                             
                             VStack(alignment: .leading, spacing: 12) {
-                                /// Songtitel
                                 Text("\(item.name)")
                                     .font(.headline)
                                 
-                                /// Name des Künstlers
                                 Text("\(item.artistName)")
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                                 
                                 HStack {
-                                    /// Releasedate
                                     Text(item.releaseDate)
                                         .font(.footnote)
                                         .foregroundColor(.gray)
@@ -110,14 +107,13 @@ struct ChartListView: View {
                             }
                             Spacer()
                             
-                            /// Albumcover
                             AsyncImage(url: url) { image in
                                 image
                                     .resizable()
                                     .frame(width: 95, height: 95)
                                     .cornerRadius(8)
                             } placeholder: {
-                                //Image("placeholder") ohne placeholder viel flüssigeres Scrollverhalten
+                                //Image("placeholder") empty for smoother scrolling
                             }
                         }
                     }
@@ -130,7 +126,7 @@ struct ChartListView: View {
             .background(Color(.systemGray6).opacity(0.5))
         }
         .task {
-            // Lieder beim ersten Laden der Ansicht über API-Abfrage holen
+            // initial loading of songs by calling API
             await viewModel.fetchScheduleFromAPI()
         }
     }

@@ -9,23 +9,23 @@ import Foundation
 import SwiftUI
 
 class ChartListViewModel: ObservableObject {
-    @Published var songsArray: [ChartEntry] = [] // Array der geladene Songs speichert
-    @Published var selectedType = "Songs" // Songs oder Alben auswählen
+    @Published var songsArray: [ChartEntry] = [] // Array saves loaded songs
+    @Published var selectedType = "Songs" // Choose between songs and albums
     @Published var selectedCountry = "de" // Standard DE
     
     let loadSongs = 50
     let chartTypes = ["Songs", "Alben"]
     
-    //MARK: - Funktion um Listeneinträge neu zu laden, wenn Pickerauswahl getätigt wurde
+    //MARK: - Method to load new ListEntries when a selecton in the picker is made
     func reloadData() {
-        // Liste leeren damit API neu lädt
+        // empty list so the API can reload
         songsArray.removeAll()
         Task {
             await fetchScheduleFromAPI()
         }
     }
     
-    //MARK: - Funktion zum Laden von Daten aus API
+    //MARK: - Method to load data from the API
     func getScheduleFromAPI() async throws -> [ChartEntry] {
         let type = selectedType.lowercased() == "songs" ? "songs" : "albums"
         let urlString = "https://rss.applemarketingtools.com/api/v2/\(selectedCountry)/music/most-played/\(loadSongs)/\(type).json"
@@ -40,7 +40,7 @@ class ChartListViewModel: ObservableObject {
         return allSongs
     }
     
-    //MARK: - Funktion zum Aufruf der API Abfrage
+    //MARK: - Method to call API
     func fetchScheduleFromAPI() async {
         do {
             // Lieder laden und offset anpassen
