@@ -38,24 +38,24 @@ Ensure all required frameworks and packages are installed.
     4.    Run the app
 Select a simulator device or a connected iOS device and click “Run”.
 
-##Usage
+## Usage
 
     •    Launch the app.
     •    Select a country from the dropdown menu to view its charts.
     •    Switch between “Songs” and “Albums” using the segmented control.
     •    Tap on an entry to open it in Apple Music.
 
-##Requirements
+## Requirements
 
     •    iOS 15.0 or later
     •    Xcode 14 or later
     •    Swift 5.5 or later
 
 
-##Supported Countries:
+## Supported Countries:
 The app supports a wide range of countries. A full list of supported countries can be found in the CountryList.swift file.
 
-##Contributing:
+## Contributing:
 Contributions are welcome! Feel free to open issues or submit pull requests.
 
 How to contribute:
