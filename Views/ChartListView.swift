@@ -99,7 +99,7 @@ struct ChartListView: View {
                                     .foregroundColor(.gray)
                                 
                                 HStack {
-                                    Text(item.releaseDate)
+                                    Text(item.releaseDate ?? "Neuveröffentlichung")
                                         .font(.footnote)
                                         .foregroundColor(.gray)
                                     Spacer()

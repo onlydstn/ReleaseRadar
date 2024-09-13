@@ -9,11 +9,11 @@ import Foundation
 
 //Modell
 struct ChartEntry: Codable, Identifiable {
-    let id: String
+    var id: String
     
-    let name: String // songname
-    let artistName: String // artistname
-    let releaseDate: String // releasedate
-    let artworkUrl100: String // artwork link
-    let url: String // link to apple music
+    var name: String // songname
+    var artistName: String // artistname
+    var releaseDate: String? // releasedate
+    var artworkUrl100: String // artwork link
+    var url: String // link to apple music
 }
