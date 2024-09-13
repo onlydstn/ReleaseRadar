@@ -17,13 +17,10 @@ struct ChartEntry: Codable, Identifiable {
     var artworkUrl100: String // artwork link
     var url: String // link to apple music
     
-    // create a string segment and replace the resolution to 600x600 for better artwork quality
-    func newArtworkUrl(withResolution resolution: String) -> URL? {
-        let artworkUrl100 = artworkUrl100
-        
+    var hdArtworkUrl: URL? { // create a string segment and replace the resolution to 600x600 for better artwork quality
         if let lastSlashIndex = artworkUrl100.lastIndex(of: "/") { // url segmented to everything past the last "/"
             let baseURL = artworkUrl100[..<lastSlashIndex] // url segmented to everything before the last "/"
-            let modifiedURLString = "\(baseURL)/\(resolution)bb.jpg" // new modified url to contain only baseURL and added resolution
+            let modifiedURLString = "\(baseURL)/1024x1024bb.jpg" // new modified url to contain only baseURL and added resolution
             return URL(string: modifiedURLString) // complete new url with modified resolution
         }
         return nil

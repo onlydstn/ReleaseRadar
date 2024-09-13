@@ -31,8 +31,6 @@ struct ChartListView: View {
     @StateObject var viewModel = ChartListViewModel()
     @Environment(\.openURL) var openURL // opens Apple Music
     
-    let artworkResolution = "1000x1000"
-    
     var body: some View {
         NavigationStack {
             VStack {
@@ -108,8 +106,7 @@ struct ChartListView: View {
                             }
                             Spacer()
                             
-                            if let newArtworkURL = item.newArtworkUrl(withResolution: artworkResolution) {
-                                AsyncImage(url: newArtworkURL) { image in
+                            AsyncImage(url: item.hdArtworkUrl) { image in
                                     image
                                         .resizable()
                                         .frame(width: 95, height: 95)
@@ -117,7 +114,6 @@ struct ChartListView: View {
                                 } placeholder: {
                                     //Image("placeholder") empty for smoother scrolling
                                 }
-                            }
                         }
                     }
                     .buttonStyle(.plain)
