@@ -31,6 +31,8 @@ struct ChartListView: View {
     @StateObject var viewModel = ChartListViewModel()
     @Environment(\.openURL) var openURL // opens Apple Music
     
+    let artworkResolution = "1000x1000"
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -74,7 +76,6 @@ struct ChartListView: View {
             List {
                 ForEach(Array(viewModel.songsArray.enumerated()), id: \.element.id) { index, item in
                     //MARK: Albumcover Link
-                    let url = URL(string: item.artworkUrl100)
                     
                     // Button so ListEntries are tappable and Apple Music opens
                     Button(action: {
@@ -107,13 +108,15 @@ struct ChartListView: View {
                             }
                             Spacer()
                             
-                            AsyncImage(url: url) { image in
-                                image
-                                    .resizable()
-                                    .frame(width: 95, height: 95)
-                                    .cornerRadius(8)
-                            } placeholder: {
-                                //Image("placeholder") empty for smoother scrolling
+                            if let newArtworkURL = item.newArtworkUrl(withResolution: artworkResolution) {
+                                AsyncImage(url: newArtworkURL) { image in
+                                    image
+                                        .resizable()
+                                        .frame(width: 95, height: 95)
+                                        .cornerRadius(8)
+                                } placeholder: {
+                                    //Image("placeholder") empty for smoother scrolling
+                                }
                             }
                         }
                     }
