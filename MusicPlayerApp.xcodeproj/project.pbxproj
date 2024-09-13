@@ -12,7 +12,7 @@
 		3749ED002C90268A006A363A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3749ECFF2C90268A006A363A /* Preview Assets.xcassets */; };
 		3749ED0F2C902EEE006A363A /* ChartListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749ED0E2C902EEE006A363A /* ChartListView.swift */; };
 		3749ED142C903181006A363A /* ChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749ED132C903181006A363A /* ChartEntry.swift */; };
-		3749ED332C9055C0006A363A /* charts.json in Resources */ = {isa = PBXBuildFile; fileRef = 3749ED322C9055C0006A363A /* charts.json */; };
+		379610FC2C9429BB0052FC21 /* ReleaseRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379610FB2C9429BB0052FC21 /* ReleaseRadarView.swift */; };
 		37A852742C91A18E000FC2DE /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A852732C91A18E000FC2DE /* HTTPError.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +24,7 @@
 		3749ECFF2C90268A006A363A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3749ED0E2C902EEE006A363A /* ChartListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartListView.swift; sourceTree = "<group>"; };
 		3749ED132C903181006A363A /* ChartEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartEntry.swift; sourceTree = "<group>"; };
-		3749ED322C9055C0006A363A /* charts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = charts.json; sourceTree = "<group>"; };
+		379610FB2C9429BB0052FC21 /* ReleaseRadarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseRadarView.swift; sourceTree = "<group>"; };
 		37A852732C91A18E000FC2DE /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -43,7 +43,6 @@
 			isa = PBXGroup;
 			children = (
 				37A852722C91A17B000FC2DE /* Enums */,
-				3749ED322C9055C0006A363A /* charts.json */,
 				3749ED122C903172006A363A /* Model */,
 				3749ED0D2C902EDC006A363A /* Views */,
 				3749ECF62C902689006A363A /* MusicPlayerApp */,
@@ -82,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				3749ED0E2C902EEE006A363A /* ChartListView.swift */,
+				379610FB2C9429BB0052FC21 /* ReleaseRadarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -162,7 +162,6 @@
 			files = (
 				3749ED002C90268A006A363A /* Preview Assets.xcassets in Resources */,
 				3749ECFC2C90268A006A363A /* Assets.xcassets in Resources */,
-				3749ED332C9055C0006A363A /* charts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +174,7 @@
 			files = (
 				3749ECF82C902689006A363A /* MusicPlayerAppApp.swift in Sources */,
 				3749ED0F2C902EEE006A363A /* ChartListView.swift in Sources */,
+				379610FC2C9429BB0052FC21 /* ReleaseRadarView.swift in Sources */,
 				37A852742C91A18E000FC2DE /* HTTPError.swift in Sources */,
 				3749ED142C903181006A363A /* ChartEntry.swift in Sources */,
 			);

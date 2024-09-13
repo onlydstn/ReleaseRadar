@@ -16,6 +16,12 @@ struct MainTabView: View {
                     Image(systemName: "music.note.list")
                     Text("Charts")
                 }
+            
+            ReleaseRadarView()
+                .tabItem {
+                    Image(systemName: "alarm.waves.left.and.right")
+                    Text("Release Radar")
+                }
         }
     }
 }
@@ -147,23 +153,6 @@ struct ChartListView: View {
             await fetchScheduleFromAPI()
         }
     }
-    
-    //MARK: - Funkton zum Laden der lokalen JSON
-    //    private func fetchSongsFromJSON() {
-    //        guard let path = Bundle.main.path(forResource: "charts", ofType: "json") else {
-    //            print("File doesn't exist")
-    //            return
-    //        }
-    //        do {
-    //            let data = try Data(contentsOf: URL(filePath: path))
-    //            let songs = try JSONDecoder().decode(APIResults.self, from: data)
-    //
-    //            self.songsArray = songs.feed.results
-    //        } catch {
-    //            print("Error: \(error)")
-    //            return
-    //        }
-    //    }
     
     //MARK: - Funktion zum Laden von Daten aus API
     private func getScheduleFromAPI() async throws -> [ChartEntry] {
