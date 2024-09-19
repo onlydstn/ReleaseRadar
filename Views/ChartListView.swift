@@ -7,25 +7,6 @@
 
 import SwiftUI
 
-//MARK: - TabView
-struct MainTabView: View {
-    var body: some View {
-        TabView {
-            ChartListView()
-                .tabItem {
-                    Image(systemName: "music.note.list")
-                    Text("Charts")
-                }
-            
-            ReleaseRadarView()
-                .tabItem {
-                    Image(systemName: "alarm.waves.left.and.right")
-                    Text("Release Radar")
-                }
-        }
-    }
-}
-
 //MARK: - ChartListView
 struct ChartListView: View {
     @StateObject var viewModel = ChartListViewModel()
@@ -35,12 +16,25 @@ struct ChartListView: View {
         NavigationStack {
             VStack {
                 Menu {
-                    ForEach(CountryList.availableCountries.keys.sorted(), id: \.self) { key in
-                        Button(action: {
-                            viewModel.selectedCountry = key
-                            viewModel.reloadData()
-                        }) {
-                            Label(CountryList.availableCountries[key] ?? "", systemImage: viewModel.selectedCountry == key ? "checkmark.circle.fill" : "circle")
+                    Section(header: Text("Top Countries")) {
+                        ForEach(CountryList.topCountries.keys.sorted(), id: \.self) { key in
+                            Button(action: {
+                                viewModel.selectedCountry = key
+                                viewModel.reloadData()
+                            }) {
+                                Label(CountryList.topCountries[key] ?? "", systemImage: viewModel.selectedCountry == key ? "checkmark.circle.fill" : "circle")
+                            }
+                        }
+                    }
+                    Divider()
+                    Section(header: Text("Countries")) {
+                        ForEach(CountryList.availableCountries.keys.sorted(), id: \.self) { key in
+                            Button(action: {
+                                viewModel.selectedCountry = key
+                                viewModel.reloadData()
+                            }) {
+                                Label(CountryList.availableCountries[key] ?? "", systemImage: viewModel.selectedCountry == key ? "checkmark.circle.fill" : "circle")
+                            }
                         }
                     }
                 } label: {
@@ -132,6 +126,6 @@ struct ChartListView: View {
 }
 
 #Preview {
-    MainTabView()
+    NavigationTabView()
 }
 

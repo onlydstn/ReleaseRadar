@@ -12,6 +12,7 @@
 		3749ED002C90268A006A363A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3749ECFF2C90268A006A363A /* Preview Assets.xcassets */; };
 		3749ED0F2C902EEE006A363A /* ChartListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749ED0E2C902EEE006A363A /* ChartListView.swift */; };
 		3749ED142C903181006A363A /* ChartEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749ED132C903181006A363A /* ChartEntryModel.swift */; };
+		374BEE692C9C1BFA00DA96B9 /* NavigationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374BEE682C9C1BFA00DA96B9 /* NavigationTabView.swift */; };
 		379610FC2C9429BB0052FC21 /* ReleaseRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379610FB2C9429BB0052FC21 /* ReleaseRadarView.swift */; };
 		379610FF2C943B1A0052FC21 /* CountryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379610FE2C943B1A0052FC21 /* CountryList.swift */; };
 		379611012C943BC10052FC21 /* ChartListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379611002C943BC10052FC21 /* ChartListViewModel.swift */; };
@@ -29,6 +30,7 @@
 		3749ECFF2C90268A006A363A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3749ED0E2C902EEE006A363A /* ChartListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartListView.swift; sourceTree = "<group>"; };
 		3749ED132C903181006A363A /* ChartEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartEntryModel.swift; sourceTree = "<group>"; };
+		374BEE682C9C1BFA00DA96B9 /* NavigationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabView.swift; sourceTree = "<group>"; };
 		379610FB2C9429BB0052FC21 /* ReleaseRadarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseRadarView.swift; sourceTree = "<group>"; };
 		379610FE2C943B1A0052FC21 /* CountryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryList.swift; sourceTree = "<group>"; };
 		379611002C943BC10052FC21 /* ChartListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartListViewModel.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			children = (
 				3749ED0E2C902EEE006A363A /* ChartListView.swift */,
 				379610FB2C9429BB0052FC21 /* ReleaseRadarView.swift */,
+				374BEE682C9C1BFA00DA96B9 /* NavigationTabView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -102,9 +105,9 @@
 		3749ED122C903172006A363A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				379611022C943E2F0052FC21 /* APIResultsModel.swift */,
 				3749ED132C903181006A363A /* ChartEntryModel.swift */,
 				379611002C943BC10052FC21 /* ChartListViewModel.swift */,
-				379611022C943E2F0052FC21 /* APIResultsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -153,7 +156,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					3749ECF32C902689006A363A = {
 						CreatedOnToolsVersion = 15.4;
@@ -203,6 +206,7 @@
 				379610FC2C9429BB0052FC21 /* ReleaseRadarView.swift in Sources */,
 				37A852742C91A18E000FC2DE /* HTTPError.swift in Sources */,
 				379611032C943E2F0052FC21 /* APIResultsModel.swift in Sources */,
+				374BEE692C9C1BFA00DA96B9 /* NavigationTabView.swift in Sources */,
 				3749ED142C903181006A363A /* ChartEntryModel.swift in Sources */,
 				379611012C943BC10052FC21 /* ChartListViewModel.swift in Sources */,
 			);
@@ -245,6 +249,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -306,6 +311,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -333,6 +339,7 @@
 				CODE_SIGN_ENTITLEMENTS = MusicPlayerApp/MusicPlayerApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"MusicPlayerApp/Preview Content\"";
 				DEVELOPMENT_TEAM = L43C5D5DUP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -372,6 +379,7 @@
 				CODE_SIGN_ENTITLEMENTS = MusicPlayerApp/MusicPlayerApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"MusicPlayerApp/Preview Content\"";
 				DEVELOPMENT_TEAM = L43C5D5DUP;
 				ENABLE_HARDENED_RUNTIME = YES;
