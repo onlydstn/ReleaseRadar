@@ -17,7 +17,7 @@ struct ChartEntry: Codable, Identifiable {
     var artworkUrl100: String // artwork link
     var url: String // link to apple music
     
-    var hdArtworkUrl: URL? { // create a string segment and replace the resolution to 600x600 for better artwork quality
+    var hdArtworkUrl: URL? { // create a string segment and replace the resolution to 1024x1024 for better artwork quality
         if let lastSlashIndex = artworkUrl100.lastIndex(of: "/") { // url segmented to everything past the last "/"
             let baseURL = artworkUrl100[..<lastSlashIndex] // url segmented to everything before the last "/"
             let modifiedURLString = "\(baseURL)/1024x1024bb.jpg" // new modified url to contain only baseURL and added resolution
